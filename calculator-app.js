@@ -5,6 +5,33 @@ const calculator = {
   operator: null,
 };
 
+function updateNumber(number) {
+  const { displayValue } = calculator;
+  //!!!!!!THIS WORKS ABOVE FOR SOME REASON!!!!!!
+  calculator.displayValue =
+    displayValue === "0" ? number : displayValue + number;
+}
+
+function useDecimal(decimal) {
+  if (!calculator.displayValue.includes(decimal)) {
+    calculator.displayValue += decimal;
+  }
+}
+
+function useOperator
+
+//   if (displayValue === "0") {
+//     let number = document.getElementsByClassName("number");
+//     displayValue = number;
+//   } else {
+//     displayValue + number;
+//   }
+// }
+
+// }
+//   document.querySelector("#operand").innerText += display;
+//   console.log(e.target.value);
+
 function updateDisplay() {
   const display = document.querySelector("#operand");
   display.value = calculator.displayValue;
@@ -28,11 +55,13 @@ buttons.addEventListener("click", (e) => {
     return;
   }
   if (target.classList.contains("decimal-point")) {
-    console.log("decimal", target.value);
+    useDecimal(target.value);
+    updateDisplay();
     return;
   }
   // if (target.classList.contains("number")) {
-  console.log("number", target.value);
+  updateNumber(target.value);
+  updateDisplay();
   // }
 });
 
