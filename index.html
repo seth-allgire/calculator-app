@@ -3,32 +3,44 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Calculator</title>
     <link href="calculator-app.css" type="text/css" rel="stylesheet" />
   </head>
   <body>
     <div class="calculator">
-      <div class="display" id="display" value="">0</div>
-      <button class="button" id="clear-entry">CE</button>
-      <button class="button" id="clear-all">C</button>
-      <button class="button" id="operator">P</button>
-      <button class="button" id="operator">/</button>
-      <button class="button number" value="7">7</button>
-      <button class="button number" value="8">8</button>
-      <button class="button number" value="9">9</button>
-      <button class="button" id="operator">*</button>
-      <button class="button number" value="4">4</button>
-      <button class="button number" value="5">5</button>
-      <button class="button number" value="6">6</button>
-      <button class="button" id="operator">-</button>
-      <button class="button number" value="1">1</button>
-      <button class="button number" value="2">2</button>
-      <button class="button number" value="3">3</button>
-      <button class="button" id="operator">+</button>
-      <button class="button number" value="0">0</button>
-      <button class="button number" value=".">.</button>
-      <button class="button" id="equals">=</button>
+      <div class="output" id="screen">
+        <input
+          type="text"
+          class="previous-operand"
+          id="previous-operand"
+          value="1"
+          disabled
+        />
+        <!-- <div class="previous-operand" value=""></div> -->
+        <input type="text" class="operand" id="operand" value="0" disabled />
+      </div>
+      <div class="calculator-buttons">
+        <button class="button clear-entry" id="clear-entry">CE</button>
+        <button class="button clear-all" id="clear-all">C</button>
+        <button class="button operation" id="">P</button>
+        <button class="button operation" id="" value="/">&divide;</button>
+        <button class="button number" value="7">7</button>
+        <button class="button number" value="8">8</button>
+        <button class="button number" value="9">9</button>
+        <button class="button operation" id="" value="*">&times;</button>
+        <button class="button number" value="4">4</button>
+        <button class="button number" value="5">5</button>
+        <button class="button number" value="6">6</button>
+        <button class="button operation" id="" value="-">-</button>
+        <button class="button number" value="1">1</button>
+        <button class="button number" value="2">2</button>
+        <button class="button number" value="3">3</button>
+        <button class="button operation" id="" value="+">+</button>
+        <button class="button number" value="0">0</button>
+        <button class="button number decimal" value=".">.</button>
+        <button class="button equals operation" id="equals" value="=">=</button>
+      </div>
     </div>
 
     <script src="calculator-app.js"></script>

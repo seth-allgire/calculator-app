@@ -1,27 +1,72 @@
 body {
-  background-color: rgb(99, 99, 151);
+  display: flex;
+  justify-content: center;
+  background-color: rgb(247, 193, 132);
 }
 
 .calculator {
   display: flex;
   align-items: center;
+  max-width: 450px;
   justify-content: space-around;
   flex-flow: wrap row;
-  border: 1px solid black;
+  background-color: rgb(151, 113, 69);
+  border: 3px solid black;
+  border-radius: 5px;
+  height: 600px;
+  padding: 5px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.display {
-  height: 15vh;
-  flex: 1 1 100%;
-  border: 1px solid black;
-  background-color: rgba(160, 168, 167, 0.589);
+.calculator-buttons {
+  display: flex;
+  flex-flow: row wrap;
+  height: 85%;
+  align-content: space-between;
+}
+
+.output {
+  height: 15%;
+  flex: 0 1 calc(100% - 30px);
+  border: 2px solid black;
+  border-radius: 5px;
+  background-color: rgb(44, 46, 46);
+  box-shadow: inset 0 0 5px black;
   color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.operand,
+.previous-operand {
+  border: none;
+  color: white;
+  text-align: right;
+  background-color: rgba(44, 46, 46, 0.75);
+}
+
+.operand {
+  flex-basis: 75%;
+  font-size: 40px;
+}
+
+.previous-operand {
+  flex-basis: 25%;
+  font-size: 16px;
 }
 
 .button {
-  height: 15vh;
-  flex: 1 1 25%;
+  height: 15%;
+  flex: 1 1 calc(25% - 20px);
   background-color: rgba(255, 255, 255, 0.486);
+  box-shadow: 0 0 2px;
+  margin: 2px;
+  font-size: 30px;
+  border: 1px solid black;
+  border-radius: 5px;
 }
 
 .button:hover {
