@@ -40,22 +40,13 @@ body {
   padding: 10px;
 }
 
-.operand,
-.previous-operand {
+.operand {
+  flex-basis: 75%;
+  font-size: 40px;
   border: none;
   color: white;
   text-align: right;
   background-color: rgba(44, 46, 46, 0.75);
-}
-
-.operand {
-  flex-basis: 75%;
-  font-size: 40px;
-}
-
-.previous-operand {
-  flex-basis: 25%;
-  font-size: 16px;
 }
 
 .button {

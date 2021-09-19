@@ -1,36 +1,88 @@
 const calculator = {
   displayValue: "0",
-  operand: null,
+  firstOperand: null,
   waitingForSecondOperand: false,
   operator: null,
 };
 
 function updateNumber(number) {
-  const { displayValue } = calculator;
-  //!!!!!!THIS WORKS ABOVE FOR SOME REASON!!!!!!
-  calculator.displayValue =
-    displayValue === "0" ? number : displayValue + number;
+  const { displayValue, waitingForSecondOperand } = calculator;
+  //!!!!!!THIS WORKS ABOVE FOR SOME REASON-
+  //mozilla hacks- destructuring objects!!!!!! use it more!!!
+  if (waitingForSecondOperand === true) {
+    calculator.displayValue = number;
+    calculator.waitingForSecondOperand = false;
+  } else {
+    calculator.displayValue =
+      displayValue === "0" ? number : displayValue + number;
+  }
+
+  console.log(calculator);
 }
 
 function useDecimal(decimal) {
+  if (calculator.waitingForSecondOperand === true) {
+    calculator.displayValue = "0.";
+    calculator.waitingForSecondOperand = false;
+    return;
+  }
+
   if (!calculator.displayValue.includes(decimal)) {
     calculator.displayValue += decimal;
   }
 }
 
-function useOperator
+function handleOperator(nextOperator) {
+  const { firstOperand, displayValue, operator } = calculator;
+  const inputValue = parseFloat(displayValue);
 
-//   if (displayValue === "0") {
-//     let number = document.getElementsByClassName("number");
-//     displayValue = number;
-//   } else {
-//     displayValue + number;
-//   }
-// }
+  if (operator && calculator.waitingForSecondOperand) {
+    calculator.operator = nextOperator;
+    console.log(calculator);
+    return;
+  }
 
-// }
-//   document.querySelector("#operand").innerText += display;
-//   console.log(e.target.value);
+  if (firstOperand === null && !isNaN(inputValue)) {
+    calculator.firstOperand = inputValue;
+  } else if (operator) {
+    const result = calculate(firstOperand, inputValue, operator);
+    calculator.displayValue = String(result);
+    calculator.firstOperand = result;
+  }
+
+  calculator.waitingForSecondOperand = true;
+  calculator.operator = nextOperator;
+  console.log(calculator);
+}
+
+function calculate(firstOperand, secondOperand, operator) {
+  if (operator === "+") {
+    return firstOperand + secondOperand;
+  } else if (operator === "-") {
+    return firstOperand - secondOperand;
+  } else if (operator === "*") {
+    return firstOperand * secondOperand;
+  } else if (operator === "/") {
+    return firstOperand / secondOperand;
+  } else if (operator === "**") {
+    return firstOperand ** secondOperand;
+  }
+  return secondOperand;
+}
+
+function clearAll() {
+  calculator.displayValue = "0";
+  calculator.firstOperand = null;
+  calculator.waitingForSecondOperand = false;
+  calculator.operator = null;
+  console.log(calculator);
+}
+
+function clearEntry() {
+  calculator.displayValue = "0";
+  calculator.waitingForSecondOperand = true;
+  console.log(calculator);
+}
 
 function updateDisplay() {
   const display = document.querySelector("#operand");
@@ -42,16 +94,19 @@ const buttons = document.querySelector(".calculator-buttons");
 buttons.addEventListener("click", (e) => {
   const target = e.target;
 
-  if (target.classList.contains("operation")) {
-    console.log("operation", target.value);
+  if (target.classList.contains("operator")) {
+    handleOperator(target.value);
+    updateDisplay();
     return;
   }
   if (target.classList.contains("clear-entry")) {
-    console.log("clear-entry", target.value);
+    clearEntry();
+    updateDisplay();
     return;
   }
   if (target.classList.contains("clear-all")) {
-    console.log("clear-all", target.value);
+    clearAll();
+    updateDisplay();
     return;
   }
   if (target.classList.contains("decimal-point")) {
@@ -59,38 +114,7 @@ buttons.addEventListener("click", (e) => {
     updateDisplay();
     return;
   }
-  // if (target.classList.contains("number")) {
+
   updateNumber(target.value);
   updateDisplay();
-  // }
 });
-
-// const numberButtons = document.querySelectorAll(".number");
-// const operatorButtons = document.querySelectorAll(".operator");
-
-// const output = document.querySelector("#operand");
-// let screenDisplay = output.innerText;
-
-// numberButtons.forEach((button) => {
-//   addEventListener("click", displayNumbers);
-// });
-
-// !!!!!!THIS WORKED ONCE UPON A TIME!!! BUT LOCKED IN TO NUMBERS ONLY
-// NEED TO CATCH ALL THE CLICKS ON ALL THE BUTTONS!!!!!!
-// function displayNumbers(e) {
-//   const display = e.target.value;
-//   document.querySelector("#operand").innerText += display;
-//   console.log(e.target.value);
-// }
-
-// operatorButtons.forEach((button) => {
-//   addEventListener("click", displayOperator);
-// });
-
-// function displayOperator(e) {}
-// }
-
-// function updateNumbers() {
-//   if (screen.innerText === "0") {
-//   }
-// }
